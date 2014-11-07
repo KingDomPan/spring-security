@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑" , "Arial";
+    color: #666666;
+}
+
+.label.label-lb {
+    display: inline-block;
+    background-color: #e7ecee;
+    color: #7189a3;
+}
+
+.label.label-lb + .label-lb {
+    margin-left: 5px;
+}
+
+.label.label-lb:hover{
+    background-color: #a2c4e4;
+    color: #666666;
+    text-decoration: underline;
+    cursor: hand;
+}
+
+.label.label-lb:active{
+    background-color: #a2c4e4;
+    color: #07192b;
+}
+
+.table.table-host>tbody>tr:nth-child(odd)>td, 
+.table.table-host>tbody>tr:nth-child(odd)>th {
+    background-color: white;
+}
+
+.table.table-host>thead>tr>td,
+.table.table-host>thead>tr>th,
+.table.table-host>tbody>tr>td,
+.table.table-host>tbody>tr>th {
+    text-align: center;
+}
+
+.table.table-host>tbody>tr:hover>td, 
+.table.table-host>tbody>tr:hover>th {
+    background-color: #f6fafe;
+    background-origin: padding ;
+    -webkit-background-origin: padding;
+    -o-background-origin: padding;
+    -moz-background-origin: padding;
+}
+
+.table.table-host>tbody>tr:hover>td:first-child, 
+.table.table-host>tbody>tr:hover>th:first-child {
+    background-image: url(./resource/image/lab.png);
+    background-repeat: repeat-y;
+    background-position: 0 0;
+}

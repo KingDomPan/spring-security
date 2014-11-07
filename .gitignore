@@ -1,0 +1,8 @@
+.classpath
+.project
+.springBeans
+.settings/
+target/
+*.iml
+.idea/
+oops-security/src/main/webapp/META-INF/MANIFEST.MF

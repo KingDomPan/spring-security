@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:repository="http://www.springframework.org/schema/data/repository"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.5.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.7.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- 注解驱动 -->
+    <mvc:annotation-driven />
+   
+    <!-- 对静态资源文件的访问,不支持访问WEB-INF目录
+    <mvc:default-servlet-handler />  
+    -->
+
+    <!-- 对静态资源文件的访问,支持访问WEB-INF目录 -->
+    <mvc:resources location="/WEB-INF/resource/" mapping="/resource/**" cache-period="31536000" /> 
+    <mvc:resources location="/WEB-INF/assets/" mapping="/assets/**" cache-period="31536000" /> 
+    <mvc:resources location="/WEB-INF/**" mapping="/**" cache-period="31536000" /> 
+    
+    <!-- Scan components for annotations within the configured package -->
+    <context:component-scan base-package="com.gemini.**.ctrl"></context:component-scan>
+    
+    <!-- 根据HTTP的Accept属性选择合适的MessageConverter -->
+    <bean id="byteArrayConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+    <bean id="stringConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+	       <list>
+	           <value>text/plain;charset=UTF-8</value>
+           </list>
+        </property>
+    </bean>
+    <bean id="resourceConverter" class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+    <bean id="sourceConverter" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+    <bean id="xmlAwareFormConverter" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+    <bean id="jaxb2RootElementConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+    <bean id="jacksonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+    
+    <!-- 方法处理的映射适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="byteArrayConverter"/> 
+                <ref bean="stringConverter"/> 
+                <ref bean="resourceConverter"/> 
+                <ref bean="sourceConverter"/> 
+                <ref bean="xmlAwareFormConverter"/> 
+                <ref bean="jaxb2RootElementConverter"/> 
+                <ref bean="jacksonConverter"/> 
+            </list>
+        </property>
+    </bean>
+
+    <!-- 总错误处理 -->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">
+                    redirect:front/500/index
+                </prop>
+                <prop key="java.lang.Throwable">
+                    redirect:front/500/index
+                </prop>
+            </props>
+        </property>
+        <property name="defaultErrorView">
+            <value>redirect:front/500/index</value>
+        </property>
+        <property name="defaultStatusCode">
+            <value>500</value>
+        </property>
+        <property name="warnLogCategory" value="WARN"/> 
+    </bean>
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+    
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 返回的视图模型数据需要经过jstl来处理 -->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+</beans>

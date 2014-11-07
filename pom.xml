@@ -1,0 +1,720 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.gemini.spring</groupId>
+    <artifactId>spring-security</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <jdk.version>1.7</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.framework.version>3.2.11.RELEASE</spring.framework.version>
+        <spring.framework.security.version>3.2.5.RELEASE</spring.framework.security.version>
+        <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
+        <spring-data-mongodb.version>1.6.0.RELEASE</spring-data-mongodb.version>
+        <mysql.version>5.1.33</mysql.version>
+        <slf4j.version>1.6.1</slf4j.version>
+        <junit.version>4.8.2</junit.version>
+        <struts2.version>2.3.12</struts2.version>
+        <cglib.version>3.1</cglib.version>
+        <aspectjweaver.version>1.7.4</aspectjweaver.version>
+        <commons.version>3.1</commons.version>
+        <jackson.version>1.9.13</jackson.version>
+        <json.lib.version>2.4</json.lib.version>
+        <servlet.api.version>3.0.1</servlet.api.version>
+        <jsp.api.version>2.2</jsp.api.version>
+        <jstl.version>1.2</jstl.version>
+        <hibernate.version>3.6.10.Final</hibernate.version>
+        <hibernate.ogm.version>3.0.0.Alpha2</hibernate.ogm.version>
+        <infinispan.version>5.2.9.Final</infinispan.version>
+        <javax.annotation.version>1.2</javax.annotation.version>
+        <commons.lang.version>2.6</commons.lang.version>
+        <commons.dbcp>1.4</commons.dbcp>
+        <commons.io.version>1.4</commons.io.version>
+        <commons.collections.version>3.2.1</commons.collections.version>
+        <javassist.version>3.18.2-GA</javassist.version>
+        <cargo.version>1.4.9</cargo.version>
+        <jetty.version>9.2.3.v20140905</jetty.version>
+        <google.collect>0.8.0</google.collect>
+    </properties>
+
+    <!-- 构件仓库 -->
+    <repositories>
+        <repository>
+            <id>oschina Releases</id>
+            <name>oschina Releases</name>
+            <url>http://maven.oschina.net/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>apache-repo</id>
+            <name>apache Repository</name>
+            <url>https://repository.apache.org/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>java-repo</id>
+            <name>java Repository</name>
+            <url>http://download.java.net/maven/2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>springsource-repo</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.spring.io/release/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>springsource-repo-snapshot</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.spring.io/snapshot/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>cloudhopper</id>
+            <name>Repository for Cloudhopper</name>
+            <url>http://maven.cloudhopper.com/repos/third-party/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jboss-repo-releases</id>
+            <name>Jboss Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven-repo1</id>
+            <name>maven-repo1</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sourceforge-releases</id>
+            <name>Sourceforge Releases</name>
+            <url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- 插件仓库 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>oschina Releases</id>
+            <name>oschina Releases</name>
+            <url>http://maven.oschina.net/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maven2-repo</id>
+            <name>maven2 Repository</name>
+            <url>http://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Codehaus repository</id>
+            <name>Codehaus</name>
+            <url>https://nexus.codehaus.org/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <!-- <pluginRepository> <id>maven-db-plugin-repo</id> <name>maven 
+            db plugin repository</name> <url>https://maven-db-plugin.googlecode.com/svn/maven/repo</url> 
+            <layout>default</layout> </pluginRepository> -->
+    </pluginRepositories>
+
+    <dependencies>
+
+        <!-- Apache Commons DBCP -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons.dbcp}</version>
+        </dependency>
+
+        <!-- struts2核心包 -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <!-- spring和struts2整合所用到的包 -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>${struts2.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>${struts2.version}</version>
+        </dependency>
+
+        <!-- Hibernate 核心包 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.2-GA</version>
+        </dependency>
+
+        <!--代码生成库 能够在程序运行的时候动态生成接口的实现类和继承于某个类的子类, 它是依赖于ASM的,而ASM可以灵活的操作字节码. -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
+
+        <!-- Spring Dependency -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.framework.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.framework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.framework.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.framework.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+
+        <!-- Slf4j Dependency -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- Junit Dependency -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--一个最常用的工具,作为jdk的补充.FastDateFormat.getInstance就要引用此包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.lang.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mod4j.com.google</groupId>
+            <artifactId>collect</artifactId>
+            <version>${google.collect}</version>
+        </dependency>
+
+        <!-- Common package -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons.collections.version}</version>
+        </dependency>
+
+        <!-- java中Json解析 -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${json.lib.version}</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+
+        <!-- jstl标签 -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+        <!-- servlet接口 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- jsp接口 -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jpa Annotation接口 -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Mysql JDBC -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include><!-- 开启资源过滤, 可在不同环境下构建 -->
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <argLine>-Xmx256M</argLine>
+                    <includes>
+                        <include>**/*Test*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warName>${project.artifactId}</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <primaryArtifact>false</primaryArtifact>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 使用jetty进行调试, mvn jetty:run -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <httpConnector>
+                        <port>9090</port>
+                    </httpConnector>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <reload>automatic</reload>
+                    <war>${project.build.directory}/${project.build.finalName}</war>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                    </webApp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <scanIntervalSeconds>0</scanIntervalSeconds>
+                            <daemon>true</daemon>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.googlecode</groupId>
+                <artifactId>maven-db-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <adminDbConnectionSettings>
+                        <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+                        <jdbcUrl>${connection.admin.url}</jdbcUrl>
+                        <userName>root</userName>
+                        <password>root</password>
+                    </adminDbConnectionSettings>
+                    <appDbConnectionSettings>
+                        <jdbcUrl>${connection.url}</jdbcUrl>
+                        <jdbcDriver>${connection.driver.class}</jdbcDriver>
+                        <userName>${connection.username}</userName>
+                        <password>${connection.password}</password>
+                    </appDbConnectionSettings>
+                    <dbDataScriptsDirectory>
+                        <param>src/main/sql/data</param>
+                    </dbDataScriptsDirectory>
+                    <dbSchemaScriptsDirectory>
+                        <param>src/main/sql/schema</param>
+                    </dbSchemaScriptsDirectory>
+                    <dbUpdateScriptsDirectory>
+                        <param>src/main/sql/update</param>
+                    </dbUpdateScriptsDirectory>
+                    <dbCreateStatements>
+                        create database ${db.name}
+                        CHARACTER
+                        SET 'utf8';;
+                    </dbCreateStatements>
+                    <dbDropStatements>drop database ${db.name};; </dbDropStatements>
+                    <sqlDelimiter>;;</sqlDelimiter>
+                    <scriptEncoding>UTF-8</scriptEncoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- 使用Cargo实现自动化部署到tomcat, 需要TOMCAT_HOME环境变量 -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>${cargo.version}</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat</containerId>
+                        <home>${evn.TOMCAT_HOME}</home>
+                    </container>
+                    <configuration>
+                        <type>standalone</type>
+                        <home>${project.build.directory}/tomcat</home>
+                    </configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>dev</id>
+            <properties>
+                <!-- RMDB CONFIG -->
+                <db.name>spring</db.name>
+                <connection.driver.class>com.mysql.jdbc.Driver</connection.driver.class>
+                <connection.username>oops</connection.username>
+                <connection.password>oops</connection.password>
+                <connection.url>
+                    <![CDATA[jdbc:mysql://localhost:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull]]>
+                </connection.url>
+                <connection.admin.url>
+                    <![CDATA[jdbc:mysql://localhost:3306?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull]]>
+                </connection.admin.url>
+                <!-- HIBETNATE CONFIG -->
+                <hibernate.show_sql>true</hibernate.show_sql>
+                <hibernate.format_sql>true</hibernate.format_sql>
+            </properties>
+        </profile>
+    </profiles>
+</project>

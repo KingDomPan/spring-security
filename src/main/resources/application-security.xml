@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <description>SpringSecurity安全配置</description>
+
+    <security:http pattern="/resource/js/**" security="none" />
+    <security:http pattern="/resource/css/**" security="none" />
+    <security:http pattern="/resource/image/**" security="none" />
+    <security:http pattern="/resource/plugins/**" security="none" />
+    <security:http pattern="/front/**/index" security="none" />
+    <security:http pattern="/assets/**" security="none" />
+
+    <security:http auto-config="true" pattern="/**" use-expressions="true"
+        access-denied-page="/front/deny/index"
+        entry-point-ref="loginUrlAuthenticationEntryPoint">
+        
+        <security:form-login login-page="/front/login/index"
+            username-parameter="username" password-parameter="password"
+            login-processing-url="/j_security_login"
+            authentication-success-handler-ref="loginSuccessHandler"
+            authentication-failure-handler-ref="exceptionMappingAuthenticationFailureHandler" />
+        <!-- session失效, 清除SecurityContext -->
+        <security:logout logout-url="/j_security_logout"
+            success-handler-ref="logoutHandler" invalidate-session="true" />
+        <security:remember-me
+            key="linG47rya87ilE55SADEeEd92boom18LIeiAl63spinsCMeablat13oP"
+            token-validity-seconds="86400" remember-me-parameter="remember_me" />
+        <security:session-management
+            invalid-session-url="/front/login/index">
+            <security:concurrency-control
+                max-sessions="1" error-if-maximum-exceeded="true" />
+        </security:session-management>
+        <security:custom-filter ref="oopsAuthorizationFilter"
+            before="FILTER_SECURITY_INTERCEPTOR" />
+    </security:http>
+
+    <!-- 用户获取逻辑 实现o.s.s.UserDetailsService接口 -->
+    <bean id="oopsUserDetailServiceImpl" class="com.gemini.security.impl.OopsUserDetailServiceImpl" />
+
+    <!-- 验证逻辑 -->
+    <security:authentication-manager
+        alias="oopsAuthenticationManager">
+        <security:authentication-provider
+            user-service-ref="oopsUserDetailServiceImpl">
+            <security:password-encoder ref="md5PasswordEncoder" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 资源访问决策管理器, 决定某个用户具有的角色, 是否有足够权限去访问某个资源 -->
+    <bean id="oopsAccessDecisionManager" class="com.gemini.security.impl.OopsAccessDecisionManager" />
+
+    <!-- 资源数据定义, 将所有资源和权限对应关系建立起来, 即定义某一资源可以被哪些角色访问 -->
+    <bean id="oopsSecurityMetadataSource" class="com.gemini.security.impl.OopsSecurityMetadataSource" />
+
+    <!-- 自定义整个整个系统的过滤器, 包括登录, 权限, 资源验证等 -->
+    <bean id="oopsAuthorizationFilter" class="com.gemini.security.impl.OopsAuthorizationFilter">
+        <property name="authenticationManager" ref="oopsAuthenticationManager" />
+        <property name="accessDecisionManager" ref="oopsAccessDecisionManager" />
+        <property name="securityMetadataSource" ref="oopsSecurityMetadataSource" />
+    </bean>
+
+    <!-- 密码加密规则, 32位大写MD5加密算法 -->
+    <bean id="md5PasswordEncoder" class="com.gemini.security.impl.MD5PasswordEncoder" />
+
+    <!-- 登录成功后的默认处理逻辑 -->
+    <bean id="loginSuccessHandler"
+        class="com.gemini.security.impl.OopsAuthenticationSuccessHandler">
+        <property name="defaultTargetUrl" value="/index" />
+        <property name="useForward" value="false" />
+    </bean>
+
+    <!-- 登录失败后的默认处理逻辑 -->
+    <bean id="loginFailureHandler"
+        class="com.gemini.security.impl.OopsAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/front/login/index?message=error" />
+        <property name="useForward" value="false" />
+    </bean>
+
+    <!-- 注销后默认处理逻辑 -->
+    <bean id="logoutHandler" class="com.gemini.security.impl.OopsLogoutHandler">
+        <property name="defaultLogoutUrl" value="/front/login/index" />
+        <property name="useForward" value="false" />
+    </bean>
+
+    <!-- 无限权处理逻辑, 定位到登录页 -->
+    <bean id="loginUrlAuthenticationEntryPoint"
+        class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/front/login/index" />
+    </bean>
+
+    <bean id="exceptionMappingAuthenticationFailureHandler"
+        class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+        <property name="exceptionMappings">
+            <map>
+                <entry
+                    key="org.springframework.security.core.userdetails.UsernameNotFoundException"
+                    value="/front/login/index?message=用户不存在" />
+
+                <entry
+                    key="org.springframework.security.authentication.BadCredentialsException"
+                    value="/front/login/index?message=密码不正确" />
+
+                <entry
+                    key="org.springframework.security.authentication.DisabledException"
+                    value="/front/login/index?message=用户不可用" />
+
+                <entry
+                    key="org.springframework.security.core.AuthenticationException"
+                    value="/front/login/index?message=登录凭证错误" />
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 开启Spring Security3认证和授权日志 -->
+    <bean class="org.springframework.security.authentication.event.LoggerListener" />
+    <bean class="org.springframework.security.access.event.LoggerListener"/>
+    
+</beans>
