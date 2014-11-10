@@ -1,6 +1,7 @@
 .error-info{
    margin-top: 50px;
    font-family: Microsoft Yahei;
+   text-align: center;
 }
 .style-error{
     background: red;

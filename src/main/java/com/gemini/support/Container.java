@@ -2,6 +2,11 @@ package com.gemini.support;
 
 import java.util.List;
 
+/**
+ * 数据集分页容器
+ * @author KingDom
+ * @param <E>
+ */
 public class Container<E> {
 
     private int totalPages;

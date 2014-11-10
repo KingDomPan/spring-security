@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+/**
+ * 注销处理器
+ * @author KingDom
+ */
 public class OopsLogoutHandler implements LogoutSuccessHandler {
 
     private String defaultLogoutUrl = null;

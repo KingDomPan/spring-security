@@ -41,4 +41,12 @@
     <!-- 用来进行Url的Mapping -->
     <bean name="defaultAnnotationHandlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:i18n/zh_CN/security-messages</value>
+            </list>
+        </property>
+    </bean>
+    
 </beans>

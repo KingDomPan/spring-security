@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
     <!-- BEGIN HEAD -->
@@ -35,7 +36,7 @@
             <div class=" col-md-7 col-md-offset-2 error-info animated fadeInUp">
                 <div class="alert alert-danger alert-dismissable style-error" >
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="false" style="position:relative;right:2px;">&times;</button>
-                    <span id="error-inf" class="error-font">用户名或密码错误，请重新输入！！！</span>
+                    <span id="error-inf" class="error-font">${SPRING_SECURITY_LAST_EXCEPTION.message}</span>
                 </div>
             </div>
         </c:if>

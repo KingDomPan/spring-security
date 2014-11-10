@@ -40,7 +40,7 @@
             username-parameter="username" password-parameter="password"
             login-processing-url="/j_security_login"
             authentication-success-handler-ref="loginSuccessHandler"
-            authentication-failure-handler-ref="exceptionMappingAuthenticationFailureHandler" />
+            authentication-failure-handler-ref="loginFailureHandler" />
         <!-- session失效, 清除SecurityContext -->
         <security:logout logout-url="/j_security_logout"
             success-handler-ref="logoutHandler" invalidate-session="true" />
@@ -93,7 +93,7 @@
 
     <!-- 登录失败后的默认处理逻辑 -->
     <bean id="loginFailureHandler"
-        class="com.gemini.security.impl.OopsAuthenticationFailureHandler">
+        class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
         <property name="defaultFailureUrl" value="/front/login/index?message=error" />
         <property name="useForward" value="false" />
     </bean>

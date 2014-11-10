@@ -15,7 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
  * 定义资源与资源的访问规范
  * 直接实现AccessDecisionManager, 不需要投票器的决策
  * @author KingDom
- *
  */
 public class OopsAccessDecisionManager implements AccessDecisionManager {
 
@@ -46,13 +45,11 @@ public class OopsAccessDecisionManager implements AccessDecisionManager {
 
     @Override
     public boolean supports(ConfigAttribute configAttributes) {
-        System.out.println("OopsAccessDecisionManager.supports(configAttributes)--------------------------------");
         return true;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        System.out.println("OopsAccessDecisionManager.supports(clazz)--------------------------------");
         return true;
     }
 

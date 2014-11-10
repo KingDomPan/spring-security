@@ -11,6 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.util.Assert;
 
+/**
+ * 验证成功处理器
+ * @author KingDom
+ */
 public class OopsAuthenticationSuccessHandler implements
         AuthenticationSuccessHandler, InitializingBean {
 
@@ -37,14 +41,16 @@ public class OopsAuthenticationSuccessHandler implements
             HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
         if (this.useForward) {
-            request.getRequestDispatcher(this.defaultTargetUrl).forward(request, response);
+            request.getRequestDispatcher(this.defaultTargetUrl).forward(
+                    request, response);
         } else {
             response.sendRedirect(this.defaultTargetUrl);
         }
     }
 
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(this.defaultTargetUrl, "The default target url must be set");
+        Assert.notNull(this.defaultTargetUrl,
+                "The default target url must be set");
     }
 
 }

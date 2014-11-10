@@ -8,7 +8,10 @@ import org.hibernate.Query;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
-/** 增删改查通用组件 */
+/**
+ * 增删改查通用组件
+ * @author KingDom
+ */
 @SuppressWarnings({ "unchecked" })
 @Component("crudHandler")
 public class CrudHandler {

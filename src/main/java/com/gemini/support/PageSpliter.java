@@ -6,7 +6,10 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
-/** 通用的分页类 */
+/**
+ * 通用的分页类
+ * @author KingDom
+ */
 @SuppressWarnings("unchecked")
 @Component("pageSpliter")
 public class PageSpliter {

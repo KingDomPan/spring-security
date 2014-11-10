@@ -11,11 +11,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.Assert;
 
-public class OopsAuthenticationFailureHandler implements AuthenticationFailureHandler, InitializingBean{
+/**
+ * 验证实验处理器
+ * @author KingDom
+ */
+public class OopsAuthenticationFailureHandler implements
+        AuthenticationFailureHandler, InitializingBean {
 
     private String defaultFailureUrl = null;
     private boolean useForward = true;
-    
+
     public String getDefaultFailureUrl() {
         return defaultFailureUrl;
     }
@@ -33,14 +38,17 @@ public class OopsAuthenticationFailureHandler implements AuthenticationFailureHa
     }
 
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(this.defaultFailureUrl, "The default failure target url must be set");
+        Assert.notNull(this.defaultFailureUrl,
+                "The default failure target url must be set");
     }
 
     public void onAuthenticationFailure(HttpServletRequest request,
-            HttpServletResponse response, AuthenticationException authenticationException)
+            HttpServletResponse response,
+            AuthenticationException authenticationException)
             throws IOException, ServletException {
         if (this.useForward) {
-            request.getRequestDispatcher(this.defaultFailureUrl).forward(request, response);
+            request.getRequestDispatcher(this.defaultFailureUrl).forward(
+                    request, response);
         } else {
             response.sendRedirect(this.defaultFailureUrl);
         }
