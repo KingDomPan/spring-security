@@ -91,9 +91,8 @@
     <script src="../../assets/plugins/jquery-lazyload/jquery.lazyload.min.js" type="text/javascript"></script>
     <script src="./login_v2.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#login_username").focus();
-          }
         })
     </script>
     <!-- END CORE TEMPLATE JS -->

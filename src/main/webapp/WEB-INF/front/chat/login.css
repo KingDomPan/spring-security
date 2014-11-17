@@ -1,0 +1,18 @@
+.error-info{
+   margin-top: 50px;
+   font-family: Microsoft Yahei;
+   text-align: center;
+}
+.style-error{
+    background: red;
+    filter:alpha(opacity=50); 
+    -moz-opacity:0.5;
+    opacity:0.5;
+    border: 1px solid black;
+}
+.error-font{
+     font-family: Microsoft Yahei;
+     color: #ffffff;
+     font-size: 12pt;
+     margin-left: 50px;
+}

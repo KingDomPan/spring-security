@@ -31,11 +31,11 @@
     <!-- 对静态资源文件的访问,不支持访问WEB-INF目录
     <mvc:default-servlet-handler />  
     -->
-
+    
     <!-- 对静态资源文件的访问,支持访问WEB-INF目录 -->
     <mvc:resources location="/WEB-INF/resource/" mapping="/resource/**" cache-period="31536000" /> 
     <mvc:resources location="/WEB-INF/assets/" mapping="/assets/**" cache-period="31536000" /> 
-    <mvc:resources location="/WEB-INF/**" mapping="/**" cache-period="31536000" /> 
+    <mvc:resources location="/WEB-INF/" mapping="/*/**" cache-period="31536000" /> 
     
     <!-- Scan components for annotations within the configured package -->
     <context:component-scan base-package="com.gemini.**.ctrl"></context:component-scan>
@@ -99,6 +99,17 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/" />
         <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!-- Dwr路径映射器 -->
+    <bean id="dwrUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="alwaysUseFullPath" value="true"/>
+        <property name="order" value="1" />
+        <property name="mappings">
+            <props>
+                <prop key="/dwr/**/*">dwrController</prop>
+            </props>
+        </property>
     </bean>
     
 </beans>

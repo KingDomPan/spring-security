@@ -38,116 +38,15 @@
         <cargo.version>1.4.9</cargo.version>
         <jetty.version>9.2.3.v20140905</jetty.version>
         <google.collect>0.8.0</google.collect>
+        <dwr.version>3.0.0-rc3-RELEASE</dwr.version>
     </properties>
 
     <!-- 构件仓库 -->
     <repositories>
         <repository>
-            <id>oschina Releases</id>
-            <name>oschina Releases</name>
-            <url>http://maven.oschina.net/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>apache-repo</id>
-            <name>apache Repository</name>
-            <url>https://repository.apache.org/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>java-repo</id>
-            <name>java Repository</name>
-            <url>http://download.java.net/maven/2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>springsource-repo</id>
-            <name>SpringSource Repository</name>
-            <url>http://repo.spring.io/release/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>springsource-repo-snapshot</id>
-            <name>SpringSource Repository</name>
-            <url>http://repo.spring.io/snapshot/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>cloudhopper</id>
-            <name>Repository for Cloudhopper</name>
-            <url>http://maven.cloudhopper.com/repos/third-party/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jboss-repo-releases</id>
-            <name>Jboss Repository</name>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>central</id>
-            <name>Maven Repository Switchboard</name>
-            <layout>default</layout>
-            <url>http://repo.maven.apache.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>maven-repo1</id>
-            <name>maven-repo1</name>
-            <layout>default</layout>
-            <url>http://repo1.maven.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>sourceforge-releases</id>
-            <name>Sourceforge Releases</name>
-            <url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url>
+            <id>nexus_home</id>
+            <name>nexus_home</name>
+            <url>http://192.168.17.197:8081/nexus/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -160,9 +59,9 @@
     <!-- 插件仓库 -->
     <pluginRepositories>
         <pluginRepository>
-            <id>oschina Releases</id>
-            <name>oschina Releases</name>
-            <url>http://maven.oschina.net/content/groups/public</url>
+            <id>nexus_home</id>
+            <name>nexus_home</name>
+            <url>http://192.168.17.197:8081/nexus/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -170,32 +69,49 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-        <pluginRepository>
-            <id>maven2-repo</id>
-            <name>maven2 Repository</name>
-            <url>http://repo1.maven.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>Codehaus repository</id>
-            <name>Codehaus</name>
-            <url>https://nexus.codehaus.org/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <!-- <pluginRepository> <id>maven-db-plugin-repo</id> <name>maven 
-            db plugin repository</name> <url>https://maven-db-plugin.googlecode.com/svn/maven/repo</url> 
-            <layout>default</layout> </pluginRepository> -->
     </pluginRepositories>
+
+    <!-- 构件仓库 <repositories> <repository> <id>oschina Releases</id> <name>oschina 
+        Releases</name> <url>http://maven.oschina.net/content/groups/public</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> <repository> <id>apache-repo</id> <name>apache 
+        Repository</name> <url>https://repository.apache.org/content/groups/public/</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> <repository> <id>java-repo</id> <name>java Repository</name> 
+        <url>http://download.java.net/maven/2/</url> <releases> <enabled>true</enabled> 
+        </releases> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+        <repository> <id>springsource-repo</id> <name>SpringSource Repository</name> 
+        <url>http://repo.spring.io/release/</url> <releases> <enabled>true</enabled> 
+        </releases> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+        <repository> <id>springsource-repo-snapshot</id> <name>SpringSource Repository</name> 
+        <url>http://repo.spring.io/snapshot/</url> <releases> <enabled>true</enabled> 
+        </releases> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+        <repository> <id>cloudhopper</id> <name>Repository for Cloudhopper</name> 
+        <url>http://maven.cloudhopper.com/repos/third-party/</url> <releases> <enabled>true</enabled> 
+        </releases> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+        <repository> <id>jboss-repo-releases</id> <name>Jboss Repository</name> <url>https://repository.jboss.org/nexus/content/repositories/releases/</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> <repository> <id>central</id> <name>Maven Repository 
+        Switchboard</name> <layout>default</layout> <url>http://repo.maven.apache.org/maven2</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> <repository> <id>maven-repo1</id> <name>maven-repo1</name> 
+        <layout>default</layout> <url>http://repo1.maven.org/maven2/</url> <releases> 
+        <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> <repository> <id>sourceforge-releases</id> <name>Sourceforge 
+        Releases</name> <url>https://oss.sonatype.org/content/repositories/sourceforge-releases</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </repository> </repositories> -->
+
+    <!-- 插件仓库 <pluginRepositories> <pluginRepository> <id>oschina Releases</id> 
+        <name>oschina Releases</name> <url>http://maven.oschina.net/content/groups/public</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </pluginRepository> <pluginRepository> <id>maven2-repo</id> 
+        <name>maven2 Repository</name> <url>http://repo1.maven.org/maven2/</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </pluginRepository> <pluginRepository> <id>Codehaus repository</id> 
+        <name>Codehaus</name> <url>https://nexus.codehaus.org/content/groups/public/</url> 
+        <releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
+        </snapshots> </pluginRepository> </pluginRepositories> -->
 
     <dependencies>
 
@@ -365,6 +281,11 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.framework.security.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.framework.security.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -471,6 +392,13 @@
             <version>${mysql.version}</version>
         </dependency>
 
+        <!-- Dwr -->
+        <dependency>
+            <groupId>org.directwebremoting</groupId>
+            <artifactId>dwr</artifactId>
+            <version>${dwr.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -504,6 +432,21 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
