@@ -1,16 +1,25 @@
-<!--匿名用户也可以访问登录页-->
+**匿名用户也可以访问登录页**
+```xml
 <intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+```
 
-<!--Spring 异常信息-->
+**Spring 异常信息**
+```xml
 ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
+```
 
-<!--项目根路径-->
+**项目根路径**
+```xml
 ${pageContext.request.contextPath}
+```
 
-<!--username的值-->
+**username的值**
+```xml
 ${sessionScope['SPRING_SECURITY_LAST_USERNAME']}
+```
 
-<!--refresh.jsp 刷新数据库中的用户,角色,权限信息-->
+**refresh.jsp 刷新数据库中的用户,角色,权限信息**
+```jsp
 <%@page import="org.springframework.context.ApplicationContext"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.springframework.beans.factory.FactoryBean"%>
@@ -24,38 +33,53 @@ ${sessionScope['SPRING_SECURITY_LAST_USERNAME']}
     filter.setSecurityMetadataSource(fids);
 %>
 <jsp:forward page="/"/>
+```
 
-<!--Salt加密-->
+**Salt加密**
+```xml
 <password-encoder hash="md5">
     <salt-source user-property="username"/>
 </password-encoder>
+```
 
-<!--取得当前的用户信息 Spring Tags-->
+**取得当前的用户信息 Spring Tags**
+```jsp
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication property="name"/>
+```
 
-<!--程序中取得当前用户对象-->
+**程序中取得当前用户对象**
+```java
 UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
     .getAuthentication()
     .getPrincipal();
+```
 
-<!--取得当前用户的所有权限-->
+**取得当前用户的所有权限**
+```java
 Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) userDetails.getAuthorities();
+```
 
-<!--403页面访问拒绝信息 ExceptionTranslationFilter.accessDeniedHandler实现-->
+**403页面访问拒绝信息 ExceptionTranslationFilter.accessDeniedHandler实现**
+```jsp
 ${requestScope['SPRING_SECURITY_403_EXCEPTION'].message}
+```
 
-
-<!--动态资源管理和自定义登录结合-->
-数据库中登录页面的权限设置为:IS_AUTHENTICATED_ANONYMOUSLY
+**动态资源管理和自定义登录结合**
+**数据库中登录页面的权限设置为:IS_AUTHENTICATED_ANONYMOUSLY**
+```sql
 INSERT INTO RESC VALUES(1,'','URL','/login.jsp*',1,'');
 INSERT INTO ROLE VALUES(3,'IS_AUTHENTICATED_ANONYMOUSLY','anonymous');
 INSERT INTO RESC_ROLE VALUES(1,3);
+```
 
-<!--只要用户登录之后就可以访问资源, 而不需要具体的权限信息-->
+**只要用户登录之后就可以访问资源, 而不需要具体的权限信息**
+```xml
 <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+```
 
-<!--auto-config=true过滤器链详解-->
+**auto-config=true过滤器链详解**
+```xml
 HttpSessionContextIntegrationFilter:
     1.1 判断用户的session中是否已经存在一个SecurityContext, 存在就放到SecurityContextHolder中
 LogoutFilter
@@ -82,8 +106,10 @@ FilterSecurityInterceptor
         (1)如果用户尚未登录,则抛出AuthenticationCredentialsNotFoundException
         (2)如果用户已登录，但是没有访问当前资源的权限，则抛出AccessDeniedException
         (3)如果用户已登录，也具有访问当前资源的权限，则放行
+```
 
-<!--标签库-->
+**标签库**
+```jsp
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 //获取当前用户名
@@ -125,3 +151,4 @@ FilterSecurityInterceptor
 <sec:authorize ifNotGranted="ROLE_ADMIN">
   <%response.sendRedirect("user.jsp");%>
 </sec:authorize>
+```
